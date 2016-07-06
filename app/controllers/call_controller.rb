@@ -16,11 +16,11 @@ class CallController < ApplicationController
     twilio_number = ENV['TEST_TWILIO_PHONE_NUMBER_VALID']
 
     Twilio::TwiML::Response.new do |response|
-      response.Dial callerId: twilio_number, timeout: 20, action: '/call/voicemail' do |dial|
+      response.Dial callerId: twilio_number, timeout: '20', action: '/call/voicemail' do |dial|
         if params.include?(:phoneNumber)
-          dial.Number params[:phoneNumber] 
+          dial.Number params[:phoneNumber]
         else
-          dial.Client('client_connect'), statusCallBackEvent: 'ringing', statusCallback: '/slack/handle-call'
+          dial.Client 'client_connect', statusCallBackEvent: 'ringing', statusCallback: '/slack/handle-call'
         end
       end
     end
