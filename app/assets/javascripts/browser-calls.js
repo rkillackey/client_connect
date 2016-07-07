@@ -38,15 +38,15 @@ Twilio.Device.error(function (error) {
 });
 
 /* Callback to determine if "support_agent" is available or not */
-Twilio.Device.presence(function(presenceEvent) {
-  if (presenceEvent.from === 'client_connect') {
-    if (presenceEvent.available) {
-      $("#support-unavailable").hide();
-    } else {
-      $("#support-unavailable").show();
-    }
-  }
-});
+// Twilio.Device.presence(function(presenceEvent) {
+//   if (presenceEvent.from === 'client_connect') {
+//     if (presenceEvent.available) {
+//       $("#support-unavailable").hide();
+//     } else {
+//       $("#support-unavailable").show();
+//     }
+//   }
+// });
 
 /* Callback for when Twilio Client initiates a new connection */
 Twilio.Device.connect(function (connection) {
