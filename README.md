@@ -19,9 +19,11 @@
 
   * Create Slack bot.
   * Add the following environment variable to the `application.yml` file:
+
     ```
     SLACK_API_TOKEN: your slack bot API token
     ```
+
 ## Getting Started
 
 1. Install dependencies
