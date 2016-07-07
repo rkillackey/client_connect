@@ -1,8 +1,3 @@
-/**
- * Twilio Client configuration for the browser-calls-rails
- * example application.
- */
-
 // Store some selectors for elements we'll reuse
 var callStatus = $("#call-status");
 var answerButton = $(".answer-button");
