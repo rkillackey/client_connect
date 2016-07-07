@@ -6,7 +6,7 @@ class CallController < ApplicationController
     render xml: ::TwilioTwiml.dial_response(params).to_xml
   end
 
-  def voicemail
+  def complete_call
     render xml: ::TwilioTwiml.voicemail_response(params).to_xml if params['DialCallStatus'] == 'no-answer'
     render json: { message: "Call completed" }, status: :ok
   end

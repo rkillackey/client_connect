@@ -8,11 +8,9 @@ Rails.application.routes.draw do
 
   # Twilio routes
   post 'call/connect' => 'call#connect'
-  post 'call/voicemail' => 'call#voicemail'
+  post 'call/complete-call' => 'call#comeplete_call'
 
   # Slack routes
   post 'slack/handle-call' => 'slack#handle_call'
   post 'slack/handle-record' => 'slack#handle_record'
-
-  resources :tickets, only: [:create]
 end

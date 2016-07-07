@@ -29,8 +29,8 @@ module TwilioTwiml
     def dial_params
       {
         callerId: twilio_number,
-        timeout: 30,
-        action: '/call/voicemail'
+        timeout: ENV['TEST_CALL_TIMEOUT'],
+        action: '/call/complete-call'
       }
     end
 
