@@ -18,10 +18,10 @@ class SlackController < ApplicationController
   private
 
   def incoming_call_message
-    I18n.t(:slack, scope: :incoming_call_message)
+    I18n.t(:incoming_call_message, scope: :slack)
   end
 
   def recording_message
-    I18n.t(:slack, scope: :voicemail_message)
+    I18n.t(:voicemail_message, scope: :slack)
   end
 end

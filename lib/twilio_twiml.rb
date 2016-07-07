@@ -3,7 +3,6 @@ module TwilioTwiml
 
     def dial_response(params={})
       Twilio::TwiML::Response.new do |r|
-        r.Pause 30
         r.Dial dial_params do |dial|
           if params.include?(:phoneNumber)
             dial.Number params[:phoneNumber]
@@ -51,7 +50,7 @@ module TwilioTwiml
     end
 
     def voicemail_message
-      "Thank you for calling Launch Pad Lab. Please leave a message with information about your project after the tone."
+      I18n.t(:voicemail_message, scope: :twilio)
     end
   end
 end
