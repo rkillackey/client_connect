@@ -6,7 +6,7 @@ module SlackWebClient
     end
 
     def channel
-      '#leads'
+      "##{ENV['TEST_SLACK_CHANNEL']}"
     end
 
     def message_params

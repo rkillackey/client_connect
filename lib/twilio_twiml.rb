@@ -16,7 +16,6 @@ module TwilioTwiml
     def voicemail_response(params={})
       Twilio::TwiML::Response.new do |r|
         r.Say voicemail_message
-        # r.Redirect '/slack/handle-record'
         # r.Record recording_params
       end
     end
