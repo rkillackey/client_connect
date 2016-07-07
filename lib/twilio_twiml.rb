@@ -50,8 +50,7 @@ module TwilioTwiml
     end
 
     def voicemail_message
-      "Thank you for calling Launch Pad Lab.
-      Please leave a message with information about your project after the tone."
+      I18n.t(:twilio, scope: :voicemail_message)
     end
   end
 end

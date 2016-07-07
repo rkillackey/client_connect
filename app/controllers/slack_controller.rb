@@ -18,10 +18,10 @@ class SlackController < ApplicationController
   private
 
   def incoming_call_message
-    "You have a new incoming call. Click to following link to answer: "
+    I18n.t(:slack, scope: :incoming_call_message)
   end
 
   def recording_message
-    "You have received a new voicemail. Click the following link to view: "
+    I18n.t(:slack, scope: :voicemail_message)
   end
 end
