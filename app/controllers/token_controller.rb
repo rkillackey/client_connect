@@ -7,6 +7,6 @@ class TokenController < ApplicationController
   end
 
   def role
-    params[:page] == dashboard_path ? 'client_connect' : 'client'
+    params[:page] == root_path ? 'client_connect' : 'client'
   end
 end

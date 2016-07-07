@@ -39,7 +39,7 @@ Twilio.Device.error(function (error) {
 
 /* Callback to determine if "support_agent" is available or not */
 Twilio.Device.presence(function(presenceEvent) {
-  if (presenceEvent.from === 'support_agent') {
+  if (presenceEvent.from === 'client_connect') {
     if (presenceEvent.available) {
       $("#support-unavailable").hide();
     } else {
@@ -62,7 +62,7 @@ Twilio.Device.connect(function (connection) {
     updateCallStatus("In call with " + connection.message.phoneNumber);
   } else {
     // This is a call from a website user to a support agent
-    updateCallStatus("In call with support");
+    updateCallStatus("In call with LaunchPad Lab");
   }
 });
 
@@ -78,20 +78,19 @@ Twilio.Device.disconnect(function(connection) {
 
 /* Callback for when Twilio Client receives a new incoming call */
 Twilio.Device.incoming(function(connection) {
-  updateCallStatus("Incoming support call");
+  updateCallStatus("Incoming client call");
 
   console.log(connection.parameters);
-  // saveContactInformation(connection.parameters);
   // Set a callback to be executed when the connection is accepted
-  // connection.accept(function() {
-  //   updateCallStatus("In call with customer");
-  // });
-  //
-  // // Set a callback on the answer button and enable it
-  // answerButton.click(function() {
-  //   connection.accept();
-  // });
-  // answerButton.prop("disabled", false);
+  connection.accept(function() {
+    updateCallStatus("In call with client");
+  });
+
+  // Set a callback on the answer button and enable it
+  answerButton.click(function() {
+    connection.accept();
+  });
+  answerButton.prop("disabled", false);
 });
 
 /**
@@ -111,11 +110,6 @@ function getToken() {
   });
 }
 
-/* Posts details about an incoming call to our backend  */
-function saveContactInformation(params) {
-  $.post("/contact/create", { contact: params });
-}
-
 /* Call a customer from a support ticket */
 function callCustomer(phoneNumber) {
   updateCallStatus("Calling " + phoneNumber + "...");
@@ -126,7 +120,7 @@ function callCustomer(phoneNumber) {
 
 /* Call the support_agent from the home page */
 function callSupport() {
-  updateCallStatus("Calling support...");
+  updateCallStatus("Calling LaunchPad Lab...");
 
   // Our backend will assume that no params means a call to support_agent
   Twilio.Device.connect();

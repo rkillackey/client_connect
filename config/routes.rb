@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'dashboard#index'
 
   get 'dashboard' => 'dashboard#index'
 
@@ -11,11 +11,8 @@ Rails.application.routes.draw do
   post 'call/voicemail' => 'call#voicemail'
 
   # Slack routes
-  post 'slack/handle-call' => 'slack#handle_record'
+  post 'slack/handle-call' => 'slack#handle_call'
   post 'slack/handle-record' => 'slack#handle_record'
-
-  # Contact routes
-  post 'contact/create' => 'contact#create'
 
   resources :tickets, only: [:create]
 end

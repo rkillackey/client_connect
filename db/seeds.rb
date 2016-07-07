@@ -5,15 +5,37 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Ticket.create([
+Contact.create([
   {
-    name: 'Charles Holdsworth',
-    phone_number: '+14153674129',
-    description: 'I played for Middlesex in the championships and my mallet squeaked the whole time! I demand a refund!'
+    time_contacted: Time.now,
+    data: {
+            'From' => '+15005550006',
+            'FromCity' => 'Chicago',
+            'FromState' => 'IL',
+            'FromCountry' => 'US',
+            'FromZip' => '60640',
+            'CallSid' => SecureRandom.hex,
+            'AccountSid' => 'AC12345678',
+            'To' => '+13122199286'
+          },
+    notes: "Caller is interesed in building a CMS for a marketing site. Timeline is 3 months. Budget is $10,000 per month."
   },
   {
-    name: 'John Woodger',
-    phone_number: '+15712812415',
-    description: 'The mallet you sold me broke! Call me immediately!'
-  },
+    time_contacted: Time.now - 2.hours,
+    data: {
+            'From' => '+15005550006',
+            'FromCity' => 'Philadelphia',
+            'FromState' => 'PA',
+            'FromCountry' => 'US',
+            'FromZip' => '19019',
+            'CallSid' => SecureRandom.hex,
+            'AccountSid' => 'AC12345678',
+            'To' => '+13122199286'
+
+          },
+    notes: "Caller is interested in building an Ionic app. Timeline is 6 months. Budget is $50,000."
+  }
 ])
+
+p 'Seeded successfully.'
+p "#{Contact.count} Contacts have been created."

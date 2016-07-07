@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
   def index
-    @tickets = Ticket.all
+    @contacts = Contact.order('time_contacted DESC').limit(5)
   end
 end

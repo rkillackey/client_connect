@@ -1,38 +1,44 @@
 module TwilioTwiml
   class << self
 
-    def dial_response
-      twiml_response do |r|
+    def dial_response(params={})
+      Twilio::TwiML::Response.new do |r|
         r.Dial dial_params do |dial|
-          dial.Client('client_connect')
+          if params.include?(:phoneNumber)
+            dial.Number params[:phoneNumber]
+          else
+            dial.Client 'client_connect', client_params
+          end
         end
       end
     end
 
-    def voicemail_response
-      twiml_response do |r|
+    def voicemail_response(params={})
+      Twilio::TwiML::Response.new do |r|
         r.Say voicemail_message
-        r.Record recording_params
+        # r.Redirect '/slack/handle-record'
+        # r.Record recording_params
       end
-    end
-
-    def twiml_response
-      Twilio::TwiML::Response.new
     end
 
     private
 
     def twilio_number
-      ENV['TEST_TWILIO_PHONE_NUMBER_VALID']
+      ENV['TWILIO_PHONE_NUMBER']
     end
 
     def dial_params
       {
         callerId: twilio_number,
-        timeout: 20,
-        action: '/call/voicemail',
-        statusCallBackEvent: 'ringing',
-        statusCallback: '/slack/handle-call'
+        timeout: 30,
+        action: '/call/voicemail'
+      }
+    end
+
+    def client_params
+      {
+        statusCallbackEvent: 'ringing',
+        statusCallback: 'http://fc9f56eb.ngrok.io/slack/handle-call'
       }
     end
 
