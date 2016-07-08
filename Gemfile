@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'twilio-ruby'
 gem 'slack-ruby-client'
+gem 'httparty'
 
 group :development, :test do
   gem 'byebug'

@@ -3,6 +3,7 @@ module TwilioTwiml
 
     def dial_response(params={})
       Twilio::TwiML::Response.new do |r|
+        r.Pause length: 30
         r.Dial dial_params do |dial|
           if params.include?(:phoneNumber)
             dial.Number params[:phoneNumber]
@@ -35,9 +36,11 @@ module TwilioTwiml
     end
 
     def client_params
+      # ngrok public url
+      host_name = HTTParty.get('http://localhost:4040/api/tunnels')['tunnels'][0]['public_url']
       {
         statusCallbackEvent: 'ringing',
-        statusCallback: 'http://fc9f56eb.ngrok.io/slack/handle-call'
+        statusCallback: "#{host_name}/slack/handle-call"
       }
     end
 
