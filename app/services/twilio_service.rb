@@ -1,9 +1,8 @@
 class TwilioService
   class << self
-    # before_action -> { create_contact(params) }, only: [:answer_call, :text_response]
 
     def answer_call(params={})
-      @contact ||= create_contact(params)
+      create_contact(params)
       ::SlackWebClient.post_message(slack_call_message('ringing'))
       ::TwilioTwiml.dial_response(params).to_xml
     end
@@ -23,6 +22,7 @@ class TwilioService
     end
 
     def text_response(params={})
+      create_contact(params)
       args = { sender: params[:From], body: params[:Body] }
       ::SlackWebClient.post_message(slack_text_message(args))
       ::TwilioTwiml.send_text_message(params).to_xml
@@ -30,10 +30,10 @@ class TwilioService
 
     private
 
-    def create_contact(params)
-      Contact.create({
+    def create_contact(call_details)
+      @contact = Contact.create({
         time_contacted: Time.now,
-        data: params
+        data: call_details
       })
     end
 

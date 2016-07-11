@@ -2,9 +2,9 @@ class TwilioController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def enqueue
-    # @contact = create_contact if params.include?('From')
+    @contact = create_contact if params.include?('From')
     # ::SlackWebClient.post_message(incoming_call_message)
-    # render xml: ::TwilioTwiml.enqueue_response.to_xml
+    render xml: ::TwilioTwiml.enqueue_response.to_xml
   end
 
   def connect
@@ -28,6 +28,4 @@ class TwilioController < ApplicationController
   def text
     render xml: ::TwilioService.text_response(params), status: :ok
   end
-
-  
 end

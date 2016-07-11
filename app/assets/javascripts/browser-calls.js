@@ -32,17 +32,6 @@ Twilio.Device.error(function (error) {
   updateCallStatus("ERROR: " + error.messsage);
 });
 
-/* Callback to determine if "support_agent" is available or not */
-// Twilio.Device.presence(function(presenceEvent) {
-//   if (presenceEvent.from === 'client_connect') {
-//     if (presenceEvent.available) {
-//       $("#support-unavailable").hide();
-//     } else {
-//       $("#support-unavailable").show();
-//     }
-//   }
-// });
-
 /* Callback for when Twilio Client initiates a new connection */
 Twilio.Device.connect(function (connection) {
   // Enable the hang up button and disable the call buttons
@@ -50,7 +39,7 @@ Twilio.Device.connect(function (connection) {
   callCustomerButtons.prop("disabled", true);
   callSupportButton.prop("disabled", true);
   answerButton.prop("disabled", true);
-  notesTextArea.prop("disabled", true)
+  notesTextArea.prop("disabled", false)
 
   // If phoneNumber is part of the connection, this is a call from a
   // support agent to a customer's phone
@@ -68,6 +57,7 @@ Twilio.Device.disconnect(function(connection) {
   hangUpButton.prop("disabled", true);
   callCustomerButtons.prop("disabled", false);
   callSupportButton.prop("disabled", false);
+  notesTextArea.prop("disabled", true)
 
   updateCallStatus("Ready");
 });
@@ -104,7 +94,6 @@ function setupDevice() {
     // Set up the Twilio Client Device with the token
     Twilio.Device.setup(data.token, { debug: true });
   });
-  // $.post("/call/create", )
 }
 
 /* Call a customer from a support ticket */

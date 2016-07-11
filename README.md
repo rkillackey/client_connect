@@ -1,5 +1,8 @@
 # ClientConnect
 
+## Overview
+ClientConnect is a platform for connecting with your clients!
+
 ## Dependencies
 
 * Ruby 2.2.3

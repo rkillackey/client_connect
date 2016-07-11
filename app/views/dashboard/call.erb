@@ -2,7 +2,7 @@
 
 <h3>Notes</h3>
 <% form_for @contact do |f| %>
-  <%= f.text_area :notes, cols: 40, rows: 10, class: 'class-notes-text' %>
+  <%= f.text_area :notes, cols: 40, rows: 10, class: 'class-notes-text', disabled: true %>
   <%= f.submit %>
 <% end %>
 <!-- <textarea class="call-notes-text" cols="40" rows="10"></textarea> -->
