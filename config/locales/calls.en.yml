@@ -1,6 +1,7 @@
 en:
   slack:
-    incoming_call_message: "You have a new incoming call. Click to following link to answer: "
+    incoming_call_message: "You have a new incoming call. Click the following link to answer: "
     voicemail_message: "You have received a new voicemail. Click the following link to view: "
+    call_answered_message: "Call was answered."
   twilio:
     voicemail_message: "Thank you for calling Launch Pad Lab. Please leave a message with information about your project after the tone."

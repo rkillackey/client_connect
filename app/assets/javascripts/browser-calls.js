@@ -12,14 +12,14 @@ var notesTextArea = $(".call-notes-text");
 
 /* Get a Twilio Client token with an AJAX request */
 $(document).ready(function() {
-  getToken();
+  setupDevice();
 });
 
 /* Callback when Twilio Client token is invalid/expired */
 Twilio.Device.offline(function (device) {
   console.log("Device token is invalid or expired.");
-  // need to figure out how to stop getToken function from executing more than once
-  // getToken();
+  // need to figure out how to stop setupDevice function from executing more than once
+  // setupDevice();
 });
 
 /* Callback to let us know Twilio Client is ready */
@@ -29,7 +29,7 @@ Twilio.Device.ready(function (device) {
 
 /* Report any errors to the call status display */
 Twilio.Device.error(function (error) {
-  updateCallStatus("ERROR: " + error.message);
+  updateCallStatus("ERROR: " + error.messsage);
 });
 
 /* Callback to determine if "support_agent" is available or not */
@@ -50,6 +50,7 @@ Twilio.Device.connect(function (connection) {
   callCustomerButtons.prop("disabled", true);
   callSupportButton.prop("disabled", true);
   answerButton.prop("disabled", true);
+  notesTextArea.prop("disabled", true)
 
   // If phoneNumber is part of the connection, this is a call from a
   // support agent to a customer's phone
@@ -98,11 +99,12 @@ function updateCallStatus(status) {
 }
 
 /* Gets the Twilio Capability token by posting to our backend */
-function getToken() {
+function setupDevice() {
   $.post("/token/generate", { page: window.location.pathname }, function(data) {
     // Set up the Twilio Client Device with the token
     Twilio.Device.setup(data.token, { debug: true });
   });
+  // $.post("/call/create", )
 }
 
 /* Call a customer from a support ticket */
