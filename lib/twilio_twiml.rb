@@ -23,7 +23,13 @@ module TwilioTwiml
     def voicemail_response(message="")
       Twilio::TwiML::Response.new do |r|
         r.Say message
-        # r.Record recording_params
+        r.Record recording_params
+      end
+    end
+
+    def send_text_message(params={})
+      Twilio::TwiML::Response.new do |r|
+        r.Sms text_response, sms_params(params[:From])
       end
     end
 
@@ -52,12 +58,24 @@ module TwilioTwiml
       {
         playBeep: true,
         maxLength: ENV['TEST_VOICEMAIL_TIMEOUT'],
-        action: '/slack/handle-record'
+        action: '/slack/handle-record',
+        trim: 'trim-silence'
       }
     end
 
     def voicemail_message
       I18n.t(:voicemail_message, scope: :twilio)
+    end
+
+    def sms_params(sender)
+      {
+        to: sender,
+        from: twilio_number
+      }
+    end
+
+    def text_response
+      I18n.t(:text_response, scope: :twilio)
     end
   end
 end
