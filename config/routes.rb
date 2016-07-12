@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root 'dashboard#index'
 
   # Dashboard
-  get 'dashboard'            => 'dashboard#index'
   get 'call'                 => 'dashboard#call'
   post 'notes'               => 'dashboard#notes'
 
