@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   # Twilio routes
   post 'call/connect'        => 'twilio#connect'
-  post 'call/complete'       => 'twilio#complete_call'
+  post 'call/complete'       => 'twilio#complete'
   post 'text/connect'        => 'twilio#text'
 
   # Slack routes

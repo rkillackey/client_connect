@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe DashboardController do
   describe '#index' do
     it 'assigns tickets' do
-      ticket = double('Ticket')
-      allow(Ticket).to receive(:all) { [ticket] }
+      contact = double('Contact')
+      allow(Contact).to receive(:all) { [contact] }
 
       get :index
-      expect(assigns :tickets).to eq([ticket])
+      expect(assigns :contacts).to eq([contact])
     end
   end
 end
