@@ -4,7 +4,8 @@ RSpec.describe DashboardController do
   describe '#index' do
     it 'assigns tickets' do
       contact = double('Contact')
-      allow(Contact).to receive(:all) { [contact] }
+      allow(Contact).to receive(:order) { contact }
+      allow(contact).to receive(:limit).with(5) { [contact] }
 
       get :index
       expect(assigns :contacts).to eq([contact])

@@ -33,6 +33,7 @@ group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 3.0'
   gem 'rspec-collection_matchers'
+  gem 'rails-controller-testing'
 end
 
 # Gems used only for assets and not required
