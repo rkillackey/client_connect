@@ -3,8 +3,6 @@ class TwilioController < ApplicationController
   before_action -> { create_contact(params) }, only: [:connect, :text]
 
   def enqueue
-    # @contact = create_contact if params.include?('From')
-    # ::SlackWebClient.post_message(incoming_call_message)
     render xml: ::TwilioTwiml.enqueue_response.to_xml
   end
 

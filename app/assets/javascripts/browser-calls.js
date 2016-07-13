@@ -4,7 +4,7 @@ var answerButton = $(".answer-button");
 var callSupportButton = $(".call-support-button");
 var hangUpButton = $(".hangup-button");
 var callCustomerButtons = $(".call-customer-button");
-var notesTextArea = $(".call-notes-text");
+// var notesTextArea = $(".call-notes-text");
 
 /**
   Twilio Device API methods
@@ -13,13 +13,6 @@ var notesTextArea = $(".call-notes-text");
 /* Get a Twilio Client token with an AJAX request */
 $(document).ready(function() {
   setupDevice();
-});
-
-/* Callback when Twilio Client token is invalid/expired */
-Twilio.Device.offline(function (device) {
-  console.log("Device token is invalid or expired.");
-  // need to figure out how to stop setupDevice function from executing more than once
-  // setupDevice();
 });
 
 /* Callback to let us know Twilio Client is ready */
@@ -32,6 +25,13 @@ Twilio.Device.error(function (error) {
   updateCallStatus("ERROR: " + error.messsage);
 });
 
+/* Callback when Twilio Client token is invalid/expired */
+Twilio.Device.offline(function (device) {
+  console.log("Device token is invalid or expired.");
+  // need to figure out how to stop setupDevice function from executing more than once
+  setupDevice();
+});
+
 /* Callback for when Twilio Client initiates a new connection */
 Twilio.Device.connect(function (connection) {
   // Enable the hang up button and disable the call buttons
@@ -39,7 +39,7 @@ Twilio.Device.connect(function (connection) {
   callCustomerButtons.prop("disabled", true);
   callSupportButton.prop("disabled", true);
   answerButton.prop("disabled", true);
-  notesTextArea.prop("disabled", false)
+  // notesTextArea.prop("disabled", false)
 
   // If phoneNumber is part of the connection, this is a call from a
   // support agent to a customer's phone
@@ -57,7 +57,7 @@ Twilio.Device.disconnect(function(connection) {
   hangUpButton.prop("disabled", true);
   callCustomerButtons.prop("disabled", false);
   callSupportButton.prop("disabled", false);
-  notesTextArea.prop("disabled", true)
+  // notesTextArea.prop("disabled", true)
 
   updateCallStatus("Ready");
 });

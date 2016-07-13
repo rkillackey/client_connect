@@ -37,6 +37,7 @@ This is the list of most recent client leads. Click the "Call client" button to 
           </button>
         </div>
         <p><strong>Phone number:</strong> <%= number_to_phone(contact[:data]['From']) %></p>
+        <p><strong>Notes:</strong> <%= truncate(contact.notes, length: 100) %></p>
       </div>
     </div>
     <% end %>
