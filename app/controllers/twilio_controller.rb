@@ -2,10 +2,6 @@ class TwilioController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action -> { create_contact(params) }, only: [:connect, :text]
 
-  def enqueue
-    render xml: ::TwilioTwiml.enqueue_response.to_xml
-  end
-
   def connect
     render xml: ::TwilioService.answer_call(params), status: :ok
   end
@@ -31,9 +27,9 @@ class TwilioController < ApplicationController
   private
 
     def create_contact(params)
-      @contact = Contact.create({
+      Contact.create({
         time_contacted: Time.now,
         data: params
-      })
+      }) unless params['From'].include?('client')
     end
 end

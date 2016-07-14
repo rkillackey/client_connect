@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   root 'dashboard#index'
 
-  # Dashboard
-  get 'call'                 => 'dashboard#call'
-
   # Token routes
   post 'token/generate'      => 'token#generate'
 
@@ -14,5 +11,5 @@ Rails.application.routes.draw do
   post 'slack/handle-call'   => 'twilio#post_incoming_call'
   post 'slack/handle-record' => 'twilio#post_voicemail'
 
-  resources :contacts, only: [:update]
+  resources :contacts, only: [:update, :show]
 end

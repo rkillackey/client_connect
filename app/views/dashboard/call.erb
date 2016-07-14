@@ -1,9 +1,0 @@
-<h2>You are in a call with <%= number_to_phone(@phone_number) %></h2>
-
-<h3>Notes:</h3>
-<%= form_for @contact do |f| %>
-  <div class="form-group">
-    <%= f.text_area :notes, cols: 40, rows: 10, class: 'form-control class-notes-text' %>
-  </div>
-  <%= f.submit 'Update Contact Notes', class: 'btn btn-primary' %>
-<% end %>

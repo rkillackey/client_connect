@@ -1,12 +1,6 @@
 module TwilioTwiml
   class << self
 
-    def enqueue_response
-      Twilio::TwiML::Response.new do |r|
-        r.Enqueue 'client_queue', waitUrl: 'http://s3.amazonaws.com/com.twilio.sounds.music/index.xml'
-      end
-    end
-
     def dial_twiml(params={})
       Twilio::TwiML::Response.new do |r|
         r.Pause length: 10
@@ -49,7 +43,7 @@ module TwilioTwiml
 
       def client_params
         {
-          statusCallbackEvent: 'ringing answered',
+          statusCallbackEvent: 'answered',
           statusCallback: "#{Ngrok.web_hook_host}/slack/handle-call"
         }
       end

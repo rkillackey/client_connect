@@ -4,7 +4,7 @@ var answerButton = $(".answer-button");
 var callSupportButton = $(".call-support-button");
 var hangUpButton = $(".hangup-button");
 var callCustomerButtons = $(".call-customer-button");
-// var notesTextArea = $(".call-notes-text");
+var notesTextArea = $(".call-notes-text");
 
 /**
   Twilio Device API methods

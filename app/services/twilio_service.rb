@@ -2,7 +2,7 @@ class TwilioService
   class << self
 
     def answer_call(params={})
-      ::SlackWebClient.post_message(slack_call_message('ringing'))
+      ::SlackWebClient.post_message(slack_call_message('ringing')) unless params[:From].include?('client')
       ::TwilioTwiml.dial_twiml(params).to_xml
     end
 
