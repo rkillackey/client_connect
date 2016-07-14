@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   post 'call/connect'        => 'twilio#connect'
   post 'call/complete'       => 'twilio#complete'
   post 'text/connect'        => 'twilio#text'
-  post 'slack/handle-call'   => 'twilio#post_incoming_call'
-  post 'slack/handle-record' => 'twilio#post_voicemail'
+  post 'slack/handle-call'   => 'twilio#answer'
+  post 'slack/handle-record' => 'twilio#voicemail'
 
   resources :contacts, only: [:update, :show]
 end

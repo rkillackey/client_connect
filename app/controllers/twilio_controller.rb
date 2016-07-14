@@ -6,16 +6,16 @@ class TwilioController < ApplicationController
     render xml: ::TwilioService.answer_call(params.merge({ contact: @contact })), status: :ok
   end
 
-  def complete
-    render xml: ::TwilioService.send_to_voicemail(params), status: :ok
-  end
-
-  def post_incoming_call
+  def answer
     response = ::TwilioService.post_slack_call(params)
     render json: response, status: :ok
   end
 
-  def post_voicemail
+  def complete
+    render xml: ::TwilioService.send_to_voicemail(params), status: :ok
+  end
+
+  def voicemail
     response = ::TwilioService.handle_voicemail_recording(params)
     render json: response, status: :ok
   end

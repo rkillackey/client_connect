@@ -1,9 +1,13 @@
 .answer-button, .call-support-button {
-    width: 48%;
-    float: left;
+  width: 48%;
+  float: left;
 }
 
 .hangup-button {
-    width: 48%;
-    float: right;
+  width: 48%;
+  float: right;
+}
+
+.hangup-button-dashboard {
+  width: 100%;
 }
