@@ -16,7 +16,7 @@ class TwilioController < ApplicationController
   end
 
   def post_voicemail
-    response = ::TwilioService.post_slack_voicemail(params)
+    response = ::TwilioService.handle_voicemail_recording(params)
     render json: response, status: :ok
   end
 

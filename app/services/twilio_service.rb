@@ -1,4 +1,4 @@
-class TwilioService
+module TwilioService
   class << self
 
     def answer_call(params={})
@@ -16,8 +16,9 @@ class TwilioService
       ::SlackWebClient.post_message(slack_call_message(status)) unless params['Direction'] == 'outbound-dial'
     end
 
-    def post_slack_voicemail(params={})
+    def handle_voicemail_recording(params={})
       url ||= params['RecordingUrl']
+      add_voicemail_link(url)
       ::SlackWebClient.post_message(slack_recording_message(url))
     end
 
@@ -49,6 +50,10 @@ class TwilioService
 
       def slack_text_message(args)
         I18n.t(:text_message, scope: :slack, sender: args[:sender], body: args[:body])
+      end
+
+      def add_voicemail_link(url)
+        @contact.update_attributes({ voicemail_link: url })
       end
   end
 end
