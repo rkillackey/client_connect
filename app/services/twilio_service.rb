@@ -20,6 +20,7 @@ module TwilioService
       url ||= params['RecordingUrl']
       add_voicemail_link(url)
       ::SlackWebClient.post_message(slack_recording_message(url))
+      ::TwilioTwiml.hangup_twiml
     end
 
     def text_response(params={})

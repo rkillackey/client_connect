@@ -27,6 +27,12 @@ module TwilioTwiml
       end
     end
 
+    def hangup_twiml
+      Twilio::TwiML::Response.new do |r|
+        r.Hangup
+      end
+    end
+
     private
 
       def twilio_number
