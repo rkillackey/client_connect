@@ -11,3 +11,7 @@
 .hangup-button-dashboard {
   width: 100%;
 }
+
+textarea {
+  resize: vertical;
+}
