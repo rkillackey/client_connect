@@ -9,7 +9,7 @@ Contact.create([
   {
     time_contacted: Time.now,
     data: {
-            'From' => '+15005550006',
+            'From' => '+16105054327',
             'FromCity' => 'Chicago',
             'FromState' => 'IL',
             'FromCountry' => 'US',
@@ -18,7 +18,7 @@ Contact.create([
             'AccountSid' => 'AC12345678',
             'To' => '+13122199286'
           },
-    notes: "Caller is interesed in building a CMS for a marketing site. Timeline is 3 months. Budget is $10,000 per month."
+    notes: "Caller is interested in building a CMS for a marketing site. Timeline is 3 months. Budget is $10,000 per month."
   },
   {
     time_contacted: Time.now - 2.hours,
@@ -34,6 +34,22 @@ Contact.create([
 
           },
     notes: "Caller is interested in building an Ionic app. Timeline is 6 months. Budget is $50,000."
+  },
+  {
+    time_contacted: Time.now - 6.hours,
+    data: {
+            'From' => '+11234567890',
+            'FromCity' => 'New York City',
+            'FromState' => 'NY',
+            'FromCountry' => 'US',
+            'FromZip' => '10002',
+            'CallSid' => SecureRandom.hex,
+            'AccountSid' => 'AC12345678',
+            'To' => '+13122199286'
+
+          },
+    notes: "Caller is interested in building a React app for a fish market with daily price information and a catch of the day.
+            Timeline is 5 months. Budget is $100,000."
   }
 ])
 

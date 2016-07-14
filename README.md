@@ -1,7 +1,7 @@
 # ClientConnect
 
 ## Overview
-ClientConnect is a platform for connecting with your clients!
+ClientConnect is a platform for connecting with potential incoming clients. [Need to write more copy]
 
 ## Dependencies
 

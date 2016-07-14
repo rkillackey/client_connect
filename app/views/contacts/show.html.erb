@@ -4,7 +4,7 @@
   <div class="col-md-4 col-md-push-8">
     <div class="panel panel-primary client-controls">
       <div class="panel-heading">
-        <h3 class="panel-title">Make a call</h3>
+        <h3 class="panel-title">Answer a call</h3>
       </div>
       <div class="panel-body">
         <p><strong>Status</strong></p>
@@ -20,12 +20,12 @@
 
   <div class="col-md-8 col-md-pull-4">
     <p class="well">
-      <strong>From: </strong><%= @contact_info['FromCity'] %>
+      <strong>From: </strong><%= "#{@contact_info['FromCity']}, #{@contact_info['FromState']} #{@contact_info['FromCountry']}" %>
     </p>
     <h3>Notes:</h3>
     <%= form_for @contact do |f| %>
       <div class="form-group">
-        <%= f.text_area :notes, cols: 40, rows: 10, class: 'form-control call-notes-text' %>
+        <%= f.text_area :notes, rows: 10, class: 'form-control call-notes-text' %>
       </div>
       <%= f.submit 'Update Contact Notes', class: 'btn btn-primary' %>
     <% end %>
