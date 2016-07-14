@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DashboardController do
   describe '#index' do
-    it 'assigns tickets' do
+    it 'shows all contact leads' do
       contact = double('Contact')
       allow(Contact).to receive(:order) { contact }
       allow(contact).to receive(:limit).with(5) { [contact] }
