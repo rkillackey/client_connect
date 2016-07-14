@@ -22,7 +22,7 @@ Twilio.Device.ready(function (device) {
 
 /* Report any errors to the call status display */
 Twilio.Device.error(function (error) {
-  updateCallStatus("ERROR: " + error.messsage);
+  updateCallStatus("ERROR: " + error.message);
 });
 
 /* Callback when Twilio Client token is invalid/expired */
