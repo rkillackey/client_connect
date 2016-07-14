@@ -1,8 +1,8 @@
 class TwilioService
   class << self
 
-    def answer_call(params={}, contact)
-      @contact = contact
+    def answer_call(params={})
+      @contact = params[:contact]
       ::SlackWebClient.post_message(slack_call_message('ringing')) unless params[:From].include?('client')
       ::TwilioTwiml.dial_twiml(params).to_xml
     end
@@ -30,9 +30,10 @@ class TwilioService
     private
 
       def slack_call_message(status)
+        link = "#{Ngrok.web_hook_host}/contacts/#{@contact.id}"
         message = {
           'in-progress' => I18n.t(:call_answered_message, scope: :slack),
-          'ringing' => "#{I18n.t(:incoming_call_message, scope: :slack, link: Ngrok.web_hook_host/contacts/@contact.id)}"
+          'ringing' => "#{I18n.t(:incoming_call_message, scope: :slack, link: link)}"
         }.with_indifferent_access
 
         message[status]

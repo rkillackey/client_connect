@@ -1,7 +1,7 @@
 en:
   slack:
     incoming_call_message: "You have a new incoming call. Click the following link to answer: %{link}"
-    voicemail_message: "You have received a new voicemail. Click the following link to view: %{link}"
+    voicemail_message: "You have received a new voicemail. Click the following link to listen: %{link}"
     call_answered_message: "Call was answered."
     text_message: "You have received a new text message from %{sender}: %{body}"
   twilio:

@@ -3,7 +3,7 @@ class TwilioController < ApplicationController
   before_action -> { create_contact(params) }, only: [:connect, :text]
 
   def connect
-    render xml: ::TwilioService.answer_call(params, @contact), status: :ok
+    render xml: ::TwilioService.answer_call(params.merge({ contact: @contact })), status: :ok
   end
 
   def complete
