@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe TwilioService do
   subject { TwilioService }
+
   let(:contact) { create(:contact) }
   let(:xml_response) { Nokogiri::XML::Builder.new { |xml| xml.root { xml.Response } } }
   let(:json_response) { { test: 'test' }.to_json }
