@@ -8,7 +8,7 @@ class TwilioController < ApplicationController
 
   def answer
     response = ::TwilioService.post_slack_call(params)
-    render json: response, status: :ok
+    render xml: response.to_xml, status: :ok
   end
 
   def complete
@@ -16,8 +16,7 @@ class TwilioController < ApplicationController
   end
 
   def voicemail
-    response = ::TwilioService.handle_voicemail_recording(params)
-    render json: response, status: :ok
+    render xml: ::TwilioService.handle_voicemail_recording(params), status: :ok
   end
 
   def text
