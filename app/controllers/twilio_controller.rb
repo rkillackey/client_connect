@@ -16,8 +16,7 @@ class TwilioController < ApplicationController
   end
 
   def voicemail
-    response = ::TwilioService.handle_voicemail_recording(params)
-    render json: response, status: :ok
+    render xml: ::TwilioService.handle_voicemail_recording(params), status: :ok
   end
 
   def text

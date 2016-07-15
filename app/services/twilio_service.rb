@@ -54,7 +54,7 @@ module TwilioService
       end
 
       def add_voicemail_link(url)
-        @contact.update_attributes({ voicemail_link: url })
+        @contact.update_attributes({ voicemail_link: url }) if @contact
       end
   end
 end

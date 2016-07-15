@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ContactsController do
-  let!(:contact) { create(:contact) }
+  let!(:contact) { create(:contact, notes: 'These notes should change') }
 
   describe 'PUT #update' do
     context 'valid attributes' do
