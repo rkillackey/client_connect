@@ -50,7 +50,7 @@ module TwilioTwiml
       def client_params
         {
           statusCallbackEvent: 'answered',
-          statusCallback: "#{Ngrok.web_hook_host}/slack/handle-call"
+          statusCallback: "#{ENV['HEROKU_URL']}/slack/handle-call"
         }
       end
 
