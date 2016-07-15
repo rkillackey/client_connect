@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe TwilioController do
   let(:xml_response) { Nokogiri::XML::Builder.new { |xml| xml.root { xml.Response } } }
-  subject { TwilioController.new }
+  let(:json_response) { { test: 'test' } }
 
   describe 'POST #connect' do
     before(:each) { allow(TwilioService).to receive(:answer_call).and_return(xml_response) }
@@ -14,12 +14,12 @@ describe TwilioController do
   end
 
   describe 'POST #answer' do
-    pending
-    # before(:each) { allow(TwilioService).to receive(:post_slack_call) }
-    #
-    # it 'renders json response from Slack' do
-    #   pending
-    # end
+    before(:each) { allow(TwilioService).to receive(:post_slack_call).and_return(json_response) }
+
+    it 'renders json response from Slack' do
+      post :answer
+      expect(response.body).to eq(json_response.to_json)
+    end
   end
 
   describe 'POST #complete' do
