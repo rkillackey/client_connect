@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe TokenController do
-  describe '#generate' do
+  describe 'POST #generate' do
     it 'generates capability token' do
       allow(TwilioCapability).to receive(:generate) { 'generated_token' }
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe DashboardController do
-  describe '#index' do
+  describe 'GET #index' do
     it 'shows all contact leads' do
       contact = double('Contact')
       allow(Contact).to receive(:order) { contact }

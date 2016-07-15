@@ -1,27 +1,27 @@
 require 'rails_helper'
 
 describe TwilioController do
-  describe '.connect' do
+  describe 'POST #connect' do
     pending
   end
 
-  describe '.answer' do
+  describe 'POST #answer' do
     pending
   end
 
-  describe '.complete' do
+  describe 'POST #complete' do
     pending
   end
 
-  describe '.voicemail' do
+  describe 'POST #voicemail' do
     pending
   end
 
-  describe '.text' do
+  describe 'POST #text' do
     pending
   end
 
-  describe '.create_contact' do
+  describe 'POST #create_contact' do
     pending
   end
 
