@@ -62,31 +62,40 @@ ClientConnect is a platform for connecting with potential incoming clients. [Nee
 ### Set Up App for Local Development
 
   1. Install dependencies
+  
      ```
      bundle install
      ```
   2. Create database, run migrations, seed database (if desired):
+  
      ```
      rake db:create db:migrate db:seed
      ```
+  3. Make sure tests pass:
+
+    ```
+    bundle exec rspec
+    ```
   3. Run the server:
+  
      ```
      rails s
      ```
   4. We will need to make the server of this app publicly accessible, using [ngrok](https://ngrok.com/). Once you have installed ngrok, run:
+
      ```
      ngrok http 3000
      ```
 
 ### Add URLs to TwiML App
 
-  1. Once you have started ngrok, update the TwiML App's Voice and Messaging Request URLs to use your ngrok hostname:
+  1. Once you have started ngrok, update the [TwiML App's](https://www.twilio.com/console/voice/dev-tools/twiml-apps/) Voice and Messaging Request URLs to use your ngrok hostname:
     ```
     VOICE: http://YOUR-NGROK-HOSTNAME.ngrok.io/call/connect
     MESSAGING: http://YOUR-NGROK-HOSTNAME.ngrok.io/text/connect
     ```
 
-    ![TwiML Screenshot](app/assets/images/twilio-urls.png)
+    ![TwiML Screenshot](app/assets/images/twiml-urls.png)
 
 ### Check It Out!
   The app is now ready to accept incoming calls and texts!
