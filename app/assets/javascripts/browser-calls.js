@@ -3,6 +3,7 @@ var callStatus = $("#call-status");
 var answerButton = $(".answer-button");
 var callSupportButton = $(".call-support-button");
 var hangUpButton = $(".hangup-button");
+var hangUpButtonDashboard = $(".hangup-button-dashboard");
 var callClientButton = $(".call-client-button");
 var notesTextArea = $(".call-notes-text");
 
@@ -35,11 +36,11 @@ Twilio.Device.offline(function (device) {
 /* Callback for when Twilio Client initiates a new connection */
 Twilio.Device.connect(function (connection) {
   // Enable the hang up button and disable the call buttons
+  hangUpButtonDashboard.prop("disabled", false);
   hangUpButton.prop("disabled", false);
   callClientButton.prop("disabled", true);
   callSupportButton.prop("disabled", true);
   answerButton.prop("disabled", true);
-  // notesTextArea.prop("disabled", false)
 
   // If phoneNumber is part of the connection, this is a call from a
   // support agent to a customer's phone
@@ -54,10 +55,10 @@ Twilio.Device.connect(function (connection) {
 /* Callback for when a call ends */
 Twilio.Device.disconnect(function(connection) {
   // Disable the hangup button and enable the call buttons
+  hangUpButtonDashboard.prop("disabled", true);
   hangUpButton.prop("disabled", true);
   callClientButton.prop("disabled", false);
   callSupportButton.prop("disabled", false);
-  // notesTextArea.prop("disabled", true)
 
   updateCallStatus("Ready");
 });
@@ -102,14 +103,6 @@ function callClient(phoneNumber) {
 
   var params = { "phoneNumber": phoneNumber };
   Twilio.Device.connect(params);
-}
-
-/* Call the support_agent from the home page */
-function callSupport() {
-  updateCallStatus("Calling LaunchPad Lab...");
-
-  // Our backend will assume that no params means a call to support_agent
-  Twilio.Device.connect();
 }
 
 /* End a call */

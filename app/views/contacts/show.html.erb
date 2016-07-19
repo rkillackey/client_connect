@@ -27,7 +27,7 @@
       <div class="form-group">
         <%= f.text_area :notes, rows: 10, class: 'form-control call-notes-text' %>
       </div>
-      <%= f.submit 'Update Contact Notes', class: 'btn btn-primary' %>
+      <%= f.submit 'Update Contact Notes', class: 'btn btn-primary', data: { confirm: 'Are you sure you want to save?' } %>
     <% end %>
   </div>
 </div>
