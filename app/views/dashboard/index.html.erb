@@ -16,8 +16,8 @@ This is the list of most recent client leads. Click the "Call client" button to 
           Connecting to Twilio...
         </div>
 
-        <button class="btn btn-lg btn-success answer-button" disabled>Answer call</button>
-        <button class="btn btn-lg btn-danger hangup-button" disabled onclick="hangUp()">Hang up</button>
+        <!-- <button class="btn btn-lg btn-success answer-button" disabled>Answer call</button> -->
+        <button class="btn btn-lg btn-danger hangup-button-dashboard" disabled onclick="hangUp()">Hang up</button>
       </div>
     </div>
   </div>
@@ -31,12 +31,16 @@ This is the list of most recent client leads. Click the "Call client" button to 
 
       <div class="panel-body">
         <div class="pull-right">
-          <button onclick="callCustomer('<%= contact[:data]['From'] %>')" type="button" class="btn btn-primary btn-lg call-customer-button">
+          <button onclick="callClient('<%= contact.data['From'] %>')" type="button" class="btn btn-primary btn-lg call-client-button">
             <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
             Call client
           </button>
         </div>
-        <p><strong>Phone number:</strong> <%= number_to_phone(contact[:data]['From']) %></p>
+        <p><strong>Phone number: </strong><%= number_to_phone(contact[:data]['From']) %></p>
+        <p><strong>Notes: </strong><%= truncate(contact.notes, length: 200) %></p>
+        <% if contact.voicemail_link %>
+          <p><%= link_to 'Listen to Voicemail', contact.voicemail_link %></p>
+        <% end %>
       </div>
     </div>
     <% end %>

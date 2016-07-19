@@ -1,0 +1,54 @@
+{
+  "name": "client_connect",
+  "description": "An app for connecting to incoming clients.",
+  "scripts": {
+    "postdeploy": "rake db:migrate && rake db:seed"
+  },
+  "env": {
+    "TWILIO_SID" : {
+      "required": true
+    },
+    "TWILIO_AUTH_TOKEN" : {
+      "required": true
+    },
+    "TWIML_APPLICATION_SID" : {
+      "required": true
+    },
+    "TWILIO_PHONE_NUMBER" : {
+      "required": true
+    },
+    "TEST_TWILIO_PHONE_NUMBER_VALID" : {
+      "required": true
+    },
+    "TWIML_APPLICATION_SID" : {
+      "required": true
+    },
+    "TEST_TWILIO_SID" : {
+      "required": true
+    },
+    "TEST_TWILIO_AUTH_TOKEN" : {
+      "required": true
+    },
+    "SLACK_API_TOKEN" : {
+      "required": true
+    },
+    "TEST_SLACK_CHANNEL" : {
+      "required": true
+    },
+    "SLACK_CHANNEL" : {
+      "required": true
+    },
+    "TEST_CALL_TIMEOUT" : {
+      "required": true
+    },
+    "CALL_TIMEOUT" : {
+      "required": true
+    },
+    "TEST_VOICEMAIL_TIMEOUT" : {
+      "required": true
+    },
+    "VOICEMAIL_TIMEOUT" : {
+      "required": true
+    }
+  }
+}

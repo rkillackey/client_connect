@@ -1,14 +1,10 @@
-/**
- * Twilio Client configuration for the browser-calls-rails
- * example application.
- */
-
 // Store some selectors for elements we'll reuse
 var callStatus = $("#call-status");
 var answerButton = $(".answer-button");
 var callSupportButton = $(".call-support-button");
 var hangUpButton = $(".hangup-button");
-var callCustomerButtons = $(".call-customer-button");
+var hangUpButtonDashboard = $(".hangup-button-dashboard");
+var callClientButton = $(".call-client-button");
 var notesTextArea = $(".call-notes-text");
 
 /**
@@ -17,14 +13,7 @@ var notesTextArea = $(".call-notes-text");
 
 /* Get a Twilio Client token with an AJAX request */
 $(document).ready(function() {
-  getToken();
-});
-
-/* Callback when Twilio Client token is invalid/expired */
-Twilio.Device.offline(function (device) {
-  console.log("Device token is invalid or expired.");
-  // need to figure out how to stop getToken function from executing more than once
-  // getToken();
+  setupDevice();
 });
 
 /* Callback to let us know Twilio Client is ready */
@@ -37,22 +26,19 @@ Twilio.Device.error(function (error) {
   updateCallStatus("ERROR: " + error.message);
 });
 
-/* Callback to determine if "support_agent" is available or not */
-Twilio.Device.presence(function(presenceEvent) {
-  if (presenceEvent.from === 'client_connect') {
-    if (presenceEvent.available) {
-      $("#support-unavailable").hide();
-    } else {
-      $("#support-unavailable").show();
-    }
-  }
+/* Callback when Twilio Client token is invalid/expired */
+Twilio.Device.offline(function (device) {
+  console.log("Device token is invalid or expired.");
+  // need to figure out how to stop setupDevice function from executing more than once
+  setupDevice();
 });
 
 /* Callback for when Twilio Client initiates a new connection */
 Twilio.Device.connect(function (connection) {
   // Enable the hang up button and disable the call buttons
+  hangUpButtonDashboard.prop("disabled", false);
   hangUpButton.prop("disabled", false);
-  callCustomerButtons.prop("disabled", true);
+  callClientButton.prop("disabled", true);
   callSupportButton.prop("disabled", true);
   answerButton.prop("disabled", true);
 
@@ -69,8 +55,9 @@ Twilio.Device.connect(function (connection) {
 /* Callback for when a call ends */
 Twilio.Device.disconnect(function(connection) {
   // Disable the hangup button and enable the call buttons
+  hangUpButtonDashboard.prop("disabled", true);
   hangUpButton.prop("disabled", true);
-  callCustomerButtons.prop("disabled", false);
+  callClientButton.prop("disabled", false);
   callSupportButton.prop("disabled", false);
 
   updateCallStatus("Ready");
@@ -103,7 +90,7 @@ function updateCallStatus(status) {
 }
 
 /* Gets the Twilio Capability token by posting to our backend */
-function getToken() {
+function setupDevice() {
   $.post("/token/generate", { page: window.location.pathname }, function(data) {
     // Set up the Twilio Client Device with the token
     Twilio.Device.setup(data.token, { debug: true });
@@ -111,19 +98,11 @@ function getToken() {
 }
 
 /* Call a customer from a support ticket */
-function callCustomer(phoneNumber) {
+function callClient(phoneNumber) {
   updateCallStatus("Calling " + phoneNumber + "...");
 
   var params = { "phoneNumber": phoneNumber };
   Twilio.Device.connect(params);
-}
-
-/* Call the support_agent from the home page */
-function callSupport() {
-  updateCallStatus("Calling LaunchPad Lab...");
-
-  // Our backend will assume that no params means a call to support_agent
-  Twilio.Device.connect();
 }
 
 /* End a call */

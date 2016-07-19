@@ -27,13 +27,17 @@
 
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="<%= dashboard_path %>">Dashboard</a></li>
+            <li><a href="<%= root_path %>">Dashboard</a></li>
           </ul>
         </div>
       </div>
     </nav>
 
     <div class="container">
+
+      <% if notice.present? %>
+        <div class="alert alert-warning" role="alert"><%= notice %></div>
+      <% end %>
 
       <%= yield %>
 
