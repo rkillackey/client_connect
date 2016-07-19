@@ -3,6 +3,7 @@ var callStatus = $("#call-status");
 var answerButton = $(".answer-button");
 var callSupportButton = $(".call-support-button");
 var hangUpButton = $(".hangup-button");
+var hangUpButtonDashboard = $(".hangup-button-dashboard");
 var callClientButton = $(".call-client-button");
 var notesTextArea = $(".call-notes-text");
 
@@ -35,11 +36,11 @@ Twilio.Device.offline(function (device) {
 /* Callback for when Twilio Client initiates a new connection */
 Twilio.Device.connect(function (connection) {
   // Enable the hang up button and disable the call buttons
+  hangUpButtonDashboard.prop("disabled", false);
   hangUpButton.prop("disabled", false);
   callClientButton.prop("disabled", true);
   callSupportButton.prop("disabled", true);
   answerButton.prop("disabled", true);
-  // notesTextArea.prop("disabled", false)
 
   // If phoneNumber is part of the connection, this is a call from a
   // support agent to a customer's phone
@@ -57,7 +58,6 @@ Twilio.Device.disconnect(function(connection) {
   hangUpButton.prop("disabled", true);
   callClientButton.prop("disabled", false);
   callSupportButton.prop("disabled", false);
-  // notesTextArea.prop("disabled", true)
 
   updateCallStatus("Ready");
 });
