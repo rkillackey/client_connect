@@ -104,14 +104,6 @@ function callClient(phoneNumber) {
   Twilio.Device.connect(params);
 }
 
-/* Call the support_agent from the home page */
-function callSupport() {
-  updateCallStatus("Calling LaunchPad Lab...");
-
-  // Our backend will assume that no params means a call to support_agent
-  Twilio.Device.connect();
-}
-
 /* End a call */
 function hangUp() {
   Twilio.Device.disconnectAll();
