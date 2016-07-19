@@ -23,7 +23,7 @@ describe TwilioService do
     before(:each) { allow(TwilioTwiml).to receive(:voicemail_twiml).and_return(xml_response) }
 
     it 'returns xml response from twilio' do
-      response = subject.send(:send_to_voicemail, { 'DialCallStatus' => 'no-answer' })
+      response = subject.send(:send_to_voicemail, { 'DialCallStatus' => 'no-answer', 'Caller' => 'phone-number' })
       expect(response).to eq(xml_response.to_xml)
     end
   end
