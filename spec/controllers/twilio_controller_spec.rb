@@ -1,29 +1,50 @@
 require 'rails_helper'
 
 describe TwilioController do
-  # describe '#connect' do
-  #   context 'when phoneNumber is provided' do
-  #     it 'dials to phone number' do
-  #       post :connect, phoneNumber: 'phone-number'
-  #       xml = load_xml(response.body)
-  #       expect(xml.at_xpath('//Response//Dial//Number').content)
-  #         .to eq('phone-number')
-  #     end
-  #   end
-  #
-  #   context 'when phoneNumber is not provided' do
-  #     it 'dials to support agent' do
-  #       post :connect
-  #       xml = load_xml(response.body)
-  #       expect(xml.at_xpath('//Response//Dial//Client').content)
-  #         .to eq('client_connect')
-  #     end
-  #   end
-  #
-  #   private
-  #
-  #   def load_xml(xml)
-  #     Nokogiri::XML(xml)
-  #   end
-  # end
+  let(:xml_response) { Nokogiri::XML::Builder.new { |xml| xml.root { xml.Response } } }
+
+  describe 'POST #connect' do
+    before(:each) { allow(TwilioService).to receive(:answer_call).and_return(xml_response) }
+
+    it 'renders xml response' do
+      post :connect, params: { From: 'phone-number' }
+      expect(response.body).to eq(xml_response.to_xml)
+    end
+  end
+
+  describe 'POST #answer' do
+    before(:each) { allow(TwilioService).to receive(:post_slack_call).and_return(xml_response) }
+
+    it 'renders json response from Slack' do
+      post :answer
+      expect(response.body).to eq(xml_response.to_xml)
+    end
+  end
+
+  describe 'POST #complete' do
+    before(:each) { allow(TwilioService).to receive(:send_to_voicemail).and_return(xml_response) }
+
+    it 'renders xml response' do
+      post :complete, params: { DialCallStatus: 'no-answer' }
+      expect(response.body).to eq(xml_response.to_xml)
+    end
+  end
+
+  describe 'POST #voicemail' do
+    before(:each) { allow(TwilioService).to receive(:handle_voicemail_recording).and_return(xml_response) }
+
+    it 'renders xml response' do
+      post :voicemail
+      expect(response.body).to eq(xml_response.to_xml)
+    end
+  end
+
+  describe 'POST #text' do
+    before(:each) { allow(TwilioService).to receive(:text_response).and_return(xml_response) }
+
+    it 'renders xml response' do
+      post :text, params: { From: 'phone-number' }
+      expect(response.body).to eq(xml_response.to_xml)
+    end
+  end
 end
