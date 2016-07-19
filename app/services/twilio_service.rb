@@ -8,7 +8,11 @@ module TwilioService
     end
 
     def send_to_voicemail(params={})
-      ::TwilioTwiml.voicemail_twiml(voicemail_message).to_xml if params['DialCallStatus'] == 'no-answer'
+      if params['DialCallStatus'] == 'no-answer'
+        ::TwilioTwiml.voicemail_twiml(voicemail_message).to_xml
+      else
+        ::TwilioTwiml.hangup_twiml.to_xml
+      end
     end
 
     def post_slack_call(params={})
