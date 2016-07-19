@@ -55,6 +55,7 @@ Twilio.Device.connect(function (connection) {
 /* Callback for when a call ends */
 Twilio.Device.disconnect(function(connection) {
   // Disable the hangup button and enable the call buttons
+  hangUpButtonDashboard.prop("disabled", true);
   hangUpButton.prop("disabled", true);
   callClientButton.prop("disabled", false);
   callSupportButton.prop("disabled", false);
