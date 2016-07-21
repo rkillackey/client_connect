@@ -1,5 +1,7 @@
 # ClientConnect
 
+[View ClientConnect on Heroku!](http://client-connect.herokuapp.com/)
+
 ## Overview
 
 ClientConnect is a platform for connecting with potential incoming clients. [Need to write more copy]
