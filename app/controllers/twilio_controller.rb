@@ -12,7 +12,7 @@ class TwilioController < ApplicationController
   end
 
   def complete
-    render xml: ::TwilioService.send_to_voicemail(params), status: :ok
+    render xml: ::TwilioService.finish_call(params), status: :ok
   end
 
   def voicemail

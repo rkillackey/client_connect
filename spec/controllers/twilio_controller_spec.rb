@@ -22,7 +22,7 @@ describe TwilioController do
   end
 
   describe 'POST #complete' do
-    before(:each) { allow(TwilioService).to receive(:send_to_voicemail).and_return(xml_response) }
+    before(:each) { allow(TwilioService).to receive(:finish_call).and_return(xml_response) }
 
     it 'renders xml response' do
       post :complete, params: { DialCallStatus: 'no-answer' }

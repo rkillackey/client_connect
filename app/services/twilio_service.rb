@@ -7,7 +7,7 @@ module TwilioService
       ::TwilioTwiml.dial_twiml(params).to_xml
     end
 
-    def send_to_voicemail(params={})
+    def finish_call(params={})
       if params['DialCallStatus'] == 'no-answer' && !params['Caller'].include?('client')
         ::TwilioTwiml.voicemail_twiml(voicemail_message).to_xml
       else
@@ -17,7 +17,7 @@ module TwilioService
 
     def post_slack_call(params={})
       status ||= params['CallStatus']
-      ::SlackWebClient.post_message(slack_call_message(status)) 
+      ::SlackWebClient.post_message(slack_call_message(status))
     end
 
     def handle_voicemail_recording(params={})
