@@ -17,7 +17,7 @@ module SlackWebClient
     end
 
     def post_message(message)
-      client.chat_postMessage(message_params.merge({ text: message }))
+      client.chat_postMessage(message_params.merge({ text: "<@channel> #{message}" }))
     end
   end
 end
