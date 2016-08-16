@@ -13,18 +13,29 @@ describe TwilioService do
       allow(TwilioTwiml).to receive(:dial_twiml).and_return(xml_response)
     }
 
-    it 'returns xml response from twilio' do
+    it 'returns xml dial response' do
       response = subject.send(:answer_call, { contact: contact, 'From' => 'phone-number' })
       expect(response).to eq(xml_response.to_xml)
     end
   end
 
   describe '#finish_call' do
-    before(:each) { allow(TwilioTwiml).to receive(:voicemail_twiml).and_return(xml_response) }
+    let(:vm_xml_response) { Nokogiri::XML::Builder.new { |xml| xml.root { xml.Play } }  }
+    let(:hangup_xml_response) { Nokogiri::XML::Builder.new { |xml| xml.root { xml.Hangup } }  }
 
-    it 'returns xml response from twilio' do
+    before(:each) {
+      allow(TwilioTwiml).to receive(:voicemail_twiml).and_return(vm_xml_response)
+      allow(TwilioTwiml).to receive(:hangup_twiml).and_return(hangup_xml_response)
+    }
+
+    it 'returns voicemail xml response when call was not answered' do
       response = subject.send(:finish_call, { 'DialCallStatus' => 'no-answer', 'Caller' => 'phone-number' })
-      expect(response).to eq(xml_response.to_xml)
+      expect(response).to eq(vm_xml_response.to_xml)
+    end
+
+    it 'returns hangup xml response when call was answered' do
+      response = subject.send(:finish_call, { 'DialCallStatus' => 'answered', 'Caller' => 'phone-number' })
+      expect(response).to eq(hangup_xml_response.to_xml)
     end
   end
 
@@ -43,7 +54,7 @@ describe TwilioService do
       allow(TwilioTwiml).to receive(:hangup_twiml).and_return(xml_response)
     }
 
-    it 'returns xml response from twilio' do
+    it 'returns xml hangup response' do
       response = subject.send(:handle_voicemail_recording)
       expect(response).to eq(xml_response.to_xml)
     end
@@ -55,7 +66,7 @@ describe TwilioService do
       allow(TwilioTwiml).to receive(:text_twiml).and_return(xml_response)
     }
 
-    it 'returns xml response from twilio' do
+    it 'returns xml text response' do
       response = subject.send(:text_response)
       expect(response).to eq(xml_response.to_xml)
     end

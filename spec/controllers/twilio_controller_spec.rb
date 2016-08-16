@@ -24,8 +24,8 @@ describe TwilioController do
   describe 'POST #complete' do
     before(:each) { allow(TwilioService).to receive(:finish_call).and_return(xml_response) }
 
-    it 'renders xml response' do
-      post :complete, params: { DialCallStatus: 'no-answer' }
+    it 'renders hangup xml response if call was answered and completed' do
+      post :complete, params: { DialCallStatus: 'answered' }
       expect(response.body).to eq(xml_response.to_xml)
     end
   end

@@ -27,10 +27,10 @@ describe TwilioTwiml do
 
   describe '#voicemail_twiml' do
     it 'returns say twiml with correct message' do
-      response = subject.send(:voicemail_twiml, { message: 'voicemail-message' })
+      response = subject.send(:voicemail_twiml)
       xml = load_xml(response)
 
-      expect(xml.at_xpath('//Response//Say').attributes['message'].value).to eq('voicemail-message')
+      expect(xml.at_xpath('//Response//Play').children[0].content).to eq('LPL1.mp3')
     end
 
     it 'returns record twiml' do
