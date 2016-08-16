@@ -6,49 +6,43 @@
   },
   "env": {
     "TWILIO_SID" : {
-      "required": true
+      "required" : true
     },
     "TWILIO_AUTH_TOKEN" : {
-      "required": true
+      "required" : true
     },
     "TWIML_APPLICATION_SID" : {
-      "required": true
+      "required" : true
     },
     "TWILIO_PHONE_NUMBER" : {
-      "required": true
+      "required" : true
     },
     "TEST_TWILIO_PHONE_NUMBER_VALID" : {
-      "required": true
+      "required" : true
     },
     "TWIML_APPLICATION_SID" : {
-      "required": true
+      "required" : true
     },
     "TEST_TWILIO_SID" : {
-      "required": true
+      "required" : true
     },
     "TEST_TWILIO_AUTH_TOKEN" : {
-      "required": true
+      "required" : true
     },
     "SLACK_API_TOKEN" : {
-      "required": true
-    },
-    "TEST_SLACK_CHANNEL" : {
-      "required": true
+      "required" : true
     },
     "SLACK_CHANNEL" : {
-      "required": true
-    },
-    "TEST_CALL_TIMEOUT" : {
-      "required": true
+      "required" : true
     },
     "CALL_TIMEOUT" : {
-      "required": true
-    },
-    "TEST_VOICEMAIL_TIMEOUT" : {
-      "required": true
+      "required" : true
     },
     "VOICEMAIL_TIMEOUT" : {
-      "required": true
+      "required" : true
+    },
+    "HEROKU_URL" : {
+      "required" : true
     }
   }
 }

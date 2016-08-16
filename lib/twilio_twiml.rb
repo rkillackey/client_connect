@@ -42,7 +42,7 @@ module TwilioTwiml
       def dial_params
         {
           callerId: twilio_number,
-          timeout: ENV['TEST_CALL_TIMEOUT'],
+          timeout: ENV['CALL_TIMEOUT'],
           action: '/call/complete'
         }
       end
@@ -57,7 +57,7 @@ module TwilioTwiml
       def recording_params
         {
           playBeep: true,
-          maxLength: ENV['TEST_VOICEMAIL_TIMEOUT'],
+          maxLength: ENV['VOICEMAIL_TIMEOUT'],
           action: '/slack/handle-record',
           trim: 'trim-silence'
         }
