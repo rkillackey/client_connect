@@ -16,7 +16,7 @@ module TwilioTwiml
 
     def voicemail_twiml(message="")
       Twilio::TwiML::Response.new do |r|
-        r.Say message
+        r.Play 'LPL1.mp3'
         r.Record recording_params
       end
     end
