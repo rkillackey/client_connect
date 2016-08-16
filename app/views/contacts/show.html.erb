@@ -19,9 +19,16 @@
   </div>
 
   <div class="col-md-8 col-md-pull-4">
-    <p class="well">
-      <strong>From: </strong><%= "#{@contact_info['FromCity']}, #{@contact_info['FromState']} #{@contact_info['FromCountry']}" %>
-    </p>
+    <div class="well">
+      <p>
+        <strong>From: </strong><%= "#{@contact_info['FromCity']}, #{@contact_info['FromState']} #{@contact_info['FromCountry']}" %>
+      </p>
+      <% if @contact.voicemail_link %>
+        <p>
+          <strong>Voicemail Link: </strong> <%= @contact.voicemail_link %>
+        </p>
+      <% end %>
+    </div>
     <h3>Notes:</h3>
     <%= form_for @contact do |f| %>
       <div class="form-group">
