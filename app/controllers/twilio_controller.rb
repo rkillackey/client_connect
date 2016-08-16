@@ -3,12 +3,7 @@ class TwilioController < ApplicationController
   before_action -> { create_contact(params) }, only: [:connect, :text]
 
   def connect
-    # render xml: ::TwilioService.answer_call(params.merge({ contact: @contact })), status: :ok
-    response =
-      Twilio::TwiML::Response.new do |r|
-        r.Play digits: '44'
-      end
-    render xml: response.to_xml
+    render xml: ::TwilioService.answer_call(params.merge({ contact: @contact })), status: :ok
   end
 
   def answer
@@ -31,7 +26,7 @@ class TwilioController < ApplicationController
   private
 
     def create_contact(params)
-      @contact ||= Contact.create({
+      @contact = Contact.create({
         time_contacted: Time.now,
         data: params
       }) unless params['From'].include?('client')
