@@ -20,15 +20,6 @@
     "TEST_TWILIO_PHONE_NUMBER_VALID" : {
       "required" : true
     },
-    "TWIML_APPLICATION_SID" : {
-      "required" : true
-    },
-    "TEST_TWILIO_SID" : {
-      "required" : true
-    },
-    "TEST_TWILIO_AUTH_TOKEN" : {
-      "required" : true
-    },
     "SLACK_API_TOKEN" : {
       "required" : true
     },
