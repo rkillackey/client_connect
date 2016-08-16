@@ -63,15 +63,15 @@ module TwilioTwiml
         }
       end
 
-      def voicemail_message
-        I18n.t(:voicemail_message, scope: :twilio)
-      end
-
       def sms_params(sender)
         {
           to: sender,
           from: twilio_number
         }
+      end
+
+      def voicemail_message
+        I18n.t(:voicemail_message, scope: :twilio)
       end
 
       def text_response
