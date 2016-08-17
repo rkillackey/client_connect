@@ -12,8 +12,8 @@ module SlackWebClient
     def message_params
       {
         channel: channel,
-        as_user: true,
-        link_names: 1
+        as_user: true
+        # link_names: 1
       }
     end
 

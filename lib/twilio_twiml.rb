@@ -3,7 +3,7 @@ module TwilioTwiml
 
     def dial_twiml(params={})
       Twilio::TwiML::Response.new do |r|
-        r.Pause length: 5
+        # r.Pause length:
         r.Dial dial_params do |dial|
           if params.include?(:phoneNumber) # LPL calls client
             dial.Number params[:phoneNumber]
@@ -42,7 +42,7 @@ module TwilioTwiml
       def dial_params
         {
           callerId: twilio_number,
-          timeout: '60',
+          timeout: ENV['CALL_TIMEOUT'],
           action: '/call/complete'
         }
       end
