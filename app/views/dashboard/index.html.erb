@@ -25,7 +25,7 @@ This is the list of most recent client leads. Click the "Call client" button to 
     <% @contacts.each do |contact| %>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Contact #<%= contact.id %>  <small class="pull-right"><%= contact.time_contacted %></small></h3>
+        <h3 class="panel-title"><%= link_to "Contact ##{contact.id}", contact_path(contact) %>  <small class="pull-right"><%= contact.time_contacted %></small></h3>
       </div>
 
       <div class="panel-body">
