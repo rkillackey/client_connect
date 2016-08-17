@@ -42,7 +42,7 @@ module TwilioTwiml
       def dial_params
         {
           callerId: twilio_number,
-          timeout: ENV['CALL_TIMEOUT'],
+          timeout: '60',
           action: '/call/complete'
         }
       end
