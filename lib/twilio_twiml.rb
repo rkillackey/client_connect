@@ -2,14 +2,12 @@ module TwilioTwiml
   class << self
 
     def dial_twiml(params={})
-      if params.include?(:phoneNumber)
-        Twilio::TwiML::Response.new do |r|
+      Twilio::TwiML::Response.new do |r|
+        if params.include?(:phoneNumber)
           r.Dial dial_params do |dial|
             dial.Number params[:phoneNumber]
           end
-        end
-      else
-        Twilio::TwiML::Response.new do |r|
+        else
           r.Pause length: ENV['DIAL_PAUSE_LENGTH']
           r.Dial dial_params do |dial|
             dial.Client 'client_connect', client_params
